@@ -65,3 +65,20 @@ class NumeroTelefonicoEstudianteForm(ModelForm):
     class Meta:
         model = NumeroTelefonico
         fields = ['telefono', 'tipo', 'estudiante']
+
+# Validaciones para numero celular y tipo de celular
+# 1 Validar que el tipo empiece con consonante
+    def clean_tipo(self):
+        tipo = self.cleaned_data['tipo'].strip()
+        primera_letra = tipo[0]
+        if primera_letra in 'aeiou':
+            raise forms.ValidationError("Tipo: debe empezar con una consonante")
+# 2 Validad que el numero telefonico tenga 10 digitos
+    def clean_telefono(self):
+        telefono = self.cleaned_data['telefono']
+        telefono = telefono.strip()
+
+        if len(telefono) != 10:
+            raise forms.ValidationError("El numero debe tener 10 digitos")
+        
+        return telefono

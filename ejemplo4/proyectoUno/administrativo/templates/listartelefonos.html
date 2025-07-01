@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Listado de Teléfonos
+{% endblock %}
+
+{% block content %}
+  <h3>Listar Teléfonos</h3>
+
+  <table id="tablaTelefonos" class="display table">
+      <thead>
+          <tr>
+              <th>Teléfono</th>
+              <th>Tipo</th>
+              <th>Estudiante</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for t in telefonos %}
+          <tr>
+              <td>{{ t.telefono }}</td>
+              <td>{{ t.tipo }}</td>
+              <td>{{ t.estudiante.nombre }} {{ t.estudiante.apellido }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+<script>
+    $(document).ready(function () {
+      $('#tablaTelefonos').DataTable({
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json"
+        }
+      });
+    });
+  </script>
+{% endblock %}
